@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("vendor.dll"));
+		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define(["vendor.dll"], factory);
-	else if(typeof exports === 'object')
-		exports["index_bundle"] = factory(require("vendor.dll"));
-	else
-		root["index_bundle"] = factory(root["vendor.dll"]);
-})(window, function(__WEBPACK_EXTERNAL_MODULE_dll_reference_vendor_dll__) {
+		define([], factory);
+	else {
+		var a = factory();
+		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+	}
+})(window, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -96,59 +96,57 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
-/***/ "./wwwroot/ts/com/vendor.ts":
-/*!**************************************************************************!*\
-  !*** delegated ./wwwroot/ts/com/vendor.ts from dll-reference vendor.dll ***!
-  \**************************************************************************/
+/***/ "./wwwroot/ts/com/kernel.ts":
+/*!**********************************!*\
+  !*** ./wwwroot/ts/com/kernel.ts ***!
+  \**********************************/
 /*! exports provided: run */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = (__webpack_require__(/*! dll-reference vendor.dll */ "dll-reference vendor.dll"))("./wwwroot/ts/com/vendor.ts");
-
-/***/ }),
-
-/***/ "./wwwroot/ts/index.ts":
-/*!*****************************!*\
-  !*** ./wwwroot/ts/index.ts ***!
-  \*****************************/
-/*! exports provided: default */
+/*! all exports used */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _com_vendor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./com/vendor */ "./wwwroot/ts/com/vendor.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "run", function() { return run; });
+function run() {
+    console.log('kernel');
+}
 
-/* harmony default export */ __webpack_exports__["default"] = (function (el) {
-    _com_vendor__WEBPACK_IMPORTED_MODULE_0__["run"]();
-    console.log('index');
-});
+
+/***/ }),
+
+/***/ "./wwwroot/ts/com/vendor.ts":
+/*!**********************************!*\
+  !*** ./wwwroot/ts/com/vendor.ts ***!
+  \**********************************/
+/*! exports provided: run */
+/*! all exports used */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "run", function() { return run; });
+/* harmony import */ var _kernel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./kernel */ "./wwwroot/ts/com/kernel.ts");
+
+function run() {
+    _kernel__WEBPACK_IMPORTED_MODULE_0__["run"]();
+    console.log('vender');
+}
 
 
 /***/ }),
 
 /***/ 0:
-/*!***********************************!*\
-  !*** multi ./wwwroot/ts/index.ts ***!
-  \***********************************/
+/*!******************!*\
+  !*** dll vendor ***!
+  \******************/
 /*! no static exports found */
+/*! all exports used */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! ./wwwroot/ts/index.ts */"./wwwroot/ts/index.ts");
-
-
-/***/ }),
-
-/***/ "dll-reference vendor.dll":
-/*!*****************************!*\
-  !*** external "vendor.dll" ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_dll_reference_vendor_dll__;
+module.exports = __webpack_require__;
 
 /***/ })
 
 /******/ });
 });
-//# sourceMappingURL=index.bundle.js.map
+//# sourceMappingURL=vendor.dll.js.map

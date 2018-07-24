@@ -1,7 +1,6 @@
-import * as vender from './vendor'
+import * as vender from './com/vendor'
 
-export default function(el: Element) {    
-    el.innerHTML = 'run index';
+export default function(el: Element) {        
     vender.run();
     console.log('index');    
 }

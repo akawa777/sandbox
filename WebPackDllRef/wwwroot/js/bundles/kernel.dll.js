@@ -96,10 +96,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
-/***/ "./wwwroot/ts/kernel.ts":
-/*!******************************!*\
-  !*** ./wwwroot/ts/kernel.ts ***!
-  \******************************/
+/***/ "./wwwroot/ts/com/kernel.ts":
+/*!**********************************!*\
+  !*** ./wwwroot/ts/com/kernel.ts ***!
+  \**********************************/
 /*! exports provided: run */
 /*! all exports used */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {

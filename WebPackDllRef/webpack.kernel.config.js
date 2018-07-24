@@ -8,42 +8,32 @@ module.exports = {
    
     // メインとなるJavaScriptファイル（エントリーポイント）
     entry: {
-        index: ['./wwwroot/ts/index.ts']
+      kernel : ['./wwwroot/ts/com/kernel.ts']
     },
 
     output: {
-        filename: '[name].bundle.js',
+      　// require.jsを使用するのでライブラリ名とjs名は同じにする
+        filename: '[name].dll.js',
         path: path.join(__dirname, 'wwwroot/js/bundles'),
         /**
          * output.library
          * window.${output.library}に定義される
          * 今回の場合、`window.vendor_library`になる
+         * しかし、require.jsを利用するので不要かもしれない
          */
-        library: '[name]_bundle',
+        //library: 'kernel/kernel.dll',
         libraryTarget: 'umd'
     },
-
+   
     devtool: 'source-map',
 
-    plugins: [
-        new webpack.DllReferencePlugin({
-          context: __dirname,
-          /**
-           * manifestファイルをロードして渡す
-           */
-          manifest: require('./wwwroot/js/bundles/vendor-manifest.json'),
-
-          sourceType: 'umd'
-        })
-    ],
-   
     module: {
       rules: [
         {
           // 拡張子 .ts の場合
           test: /\.ts$/,
           // TypeScript をコンパイルする
-          use: [            
+          use: [           
             {            
               loader: 'ts-loader'
             }
@@ -57,6 +47,26 @@ module.exports = {
       extensions: [
         '.ts'
       ]
-    }
+    },
+
+    plugins: [
+      new webpack.DllPlugin({
+        /**
+         * path
+         * manifestファイルの出力先
+         * [name]の部分はentryの名前に変換される
+         */
+        path: path.join(__dirname, 'wwwroot/js/bundles', '[name]-manifest.json'),
+        /**
+         * name
+         * どの空間（global変数）にdll bundleがあるか
+         * output.libraryに指定した値を使えばよい
+         * 
+         * 今回の場合、参照時にsourceTypeをumdにする、かつ、
+         * require.jsを使用するのでライブラリ名とjs名は同じにする
+         */        
+        name: '[name].dll'
+      })
+    ]
   };
   

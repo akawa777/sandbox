@@ -1,5 +1,5 @@
 {
-  "name": "WebPackDllRef",
+  "name": "webpackdllref",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -15,7 +15,8 @@
   },
   "scripts": {
     "build": "webpack",
-    "builddll": "webpack --config webpack.dll.config.js"
+    "buildkernel": "webpack --config webpack.kernel.config.js",
+    "buildvendor": "webpack --config webpack.vendor.config.js"
   },
   "keywords": [],
   "author": "",
