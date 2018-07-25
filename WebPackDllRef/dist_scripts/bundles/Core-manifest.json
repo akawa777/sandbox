@@ -1,0 +1,1 @@
+{"name":"Core.dll","content":{"../../../dist_scripts/com/Core/core.ts":{"id":"./Scripts/core.ts","buildMeta":{"tsLoaderDefinitionFileVersions":["E:\\testcode\\WebPackDllRef\\com\\Core\\Web\\node_modules\\typescript\\lib\\lib.d.ts@0"],"tsLoaderFileVersion":0,"exportsType":"namespace","providedExports":["run"]}}}}
