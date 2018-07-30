@@ -45,14 +45,18 @@ namespace TextRecive
             {
                 ErrorList.Add("SubId is overlapped.");
             }
+
+            //CurrentContext.CacheParameters["key"] = "xx;";
         }
 
         protected override void SetNoticeList()
         {            
-            if (string.IsNullOrEmpty(Attr))
+            if (string.IsNullOrEmpty(SubAttr))
             {
                 NoticeList.Add("SubAttr is not set." );
             }
+
+            //var key = CurrentContext.CacheParameters["key"];
         }
     }
 

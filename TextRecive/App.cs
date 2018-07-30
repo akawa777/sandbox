@@ -13,8 +13,24 @@ namespace TextRecive
         private dynamic _repository;
         private dynamic _mapper;
         private static dynamic Session;
+
+        public void Update(ItemDto itemDto)
+        {
+            using (var tran = Session.Tran())
+            {
+                var item = _repository.Find(itemDto.Id);
+
+                _mapper.Map(itemDto, item);
+
+                item.Register();
+
+                _repository.Save(item);
+
+                tran.Complete();
+            }
+        }
         
-        public System.IO.Stream ReciveText(System.IO.Stream stream)
+        public System.IO.Stream BulkUpdate(System.IO.Stream stream)
         {
             using (var tran = Session.Tran())
             {
@@ -33,17 +49,19 @@ namespace TextRecive
                 {
                     mapRule.ToMany(dto => dto.SubItemList, line => line.SubId)
                         .TargetProperty("Id", "ItemId")
-                        .TargetProperty("^Sub", string.Empty);
+                        .TargetProperty("^Sub", "SubSub");
                 });              
 
                 foreach (var textLineSection in textFildParser.TextLineSections)
                 {
                     try
                     {
-                        var itemDto = textLineSection.Map<ItemDto>();
+                        var itemDto = textLineSection.Map<ItemDto>();  
+
+                        // var AdjustedMasterCd = textLineSection.TextLines[0].MasterCd;
+                        // var planeMasterCd = textLineSection.TextLines[0].FieldValues["MasterCd"];
 
                         var item = _repository.Find(itemDto.Id);
-
                         _mapper.Map(itemDto, item);
 
                         item.Register();
@@ -56,6 +74,9 @@ namespace TextRecive
                     catch(Exception e)
                     {
                         textLineSection.AddError(e.Message);
+
+                        // textLineSection.TextLines[0].ErrorList.Add(e.Message);
+                        // textLineSection.TextLines[0].NoticeList.Add(e.Message);
                     }
                 }
 
@@ -77,13 +98,14 @@ namespace TextRecive
     {
         public int Id { get; set; }
         public string Attr { get; set; }
+        public string MasterCd { get; set; }
         public List<SubItemDto> SubItemList { get; set;}
     }
 
     public class SubItemDto
     {
         public int ItemId { get; set; }
-        public int SubId { get; set; }
-        public int SubAttr { get; set;}
+        public int SubSubId { get; set; }
+        public int SubSubAttr { get; set;}
     }
 }
